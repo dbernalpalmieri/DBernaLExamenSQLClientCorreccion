@@ -1,0 +1,129 @@
+﻿@model ML.Libro
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+
+    @using (Html.BeginForm("Form", "Libro", FormMethod.Post, new { enctype = "multipart/form-data", id = "form_usuario" }))
+    {
+        @Html.HiddenFor(model => model.IdLibro)
+        <div class="form-group d-flex mt-3 mb-3 row justify-content-center">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Nombre, "Libro", htmlAttributes: new { @class = "form-label" })
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-fonts"></i></span>
+                    @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej. John David" } })
+                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                </div>
+                <div id="alert_Nombre" class="text-danger"></div>
+            </div>
+
+
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.NumeroPaginas, "Paginas", htmlAttributes: new { @class = "form-label" })
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-fonts"></i></span>
+                    @Html.EditorFor(model => model.NumeroPaginas, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej. John David" } })
+                    @Html.ValidationMessageFor(model => model.NumeroPaginas, "", new { @class = "text-danger" })
+                </div>
+                <div id="alert_Nombre" class="text-danger"></div>
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.FechaPublicacion, "Lanzamiento", htmlAttributes: new { @class = "form-label" })
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-fonts"></i></span>
+                    @Html.EditorFor(model => model.FechaPublicacion, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej. John David", @id = "input_fecha" } })
+                    @Html.ValidationMessageFor(model => model.FechaPublicacion, "", new { @class = "text-danger" })
+                </div>
+                <div id="alert_Nombre" class="text-danger"></div>
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Edicion, "Edición", htmlAttributes: new { @class = "form-label" })
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-fonts"></i></span>
+                    @Html.EditorFor(model => model.Edicion, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej. John David" } })
+                    @Html.ValidationMessageFor(model => model.Edicion, "", new { @class = "text-danger" })
+                </div>
+                <div id="alert_Nombre" class="text-danger"></div>
+            </div>
+        </div>
+
+
+        <div class="form-group d-flex mt-3 mb-3 row justify-content-center">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Autor.IdAutor, "Autor", htmlAttributes: new { @class = "form-label" })
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-map-fill"></i></span>
+                    @Html.DropDownListFor(model => model.Autor.IdAutor, new SelectList(Model.Autor.Autores, "IdAutor", "Nombre"), "Selecciona un Autor", htmlAttributes: new { id = "", @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.Autor.IdAutor, null, new { @class = "text-danger" })
+
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Genero.IdGenero, "Genero", htmlAttributes: new { @class = "form-label" })
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-map-fill"></i></span>
+                    @Html.DropDownListFor(model => model.Genero.IdGenero, new SelectList(Model.Genero.Generos, "IdGenero", "Nombre"), "Selecciona una Editorial", htmlAttributes: new { id = "", @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.Genero.IdGenero, null, new { @class = "text-danger" })
+
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Editorial.IdEditorial, "Editorial", htmlAttributes: new { @class = "form-label" })
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-map-fill"></i></span>
+                    @Html.DropDownListFor(model => model.Editorial.IdEditorial, new SelectList(Model.Editorial.Editoriales, "IdEditorial", "Nombre"), "Selecciona una Editorial", htmlAttributes: new { id = "", @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.Editorial.IdEditorial, null, new { @class = "text-danger" })
+
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex mt-5  justify-content-center">
+            <div class="me-3">
+                <a class="btn btn-danger bi bi-arrow-left-square-fill" href="@Url.Action("GetAll", "Libro")" onclick="return confirm('¿No se guardaran los cambios, quieres continuar?')"> Regresar</a>
+
+            </div>
+            <div class="">
+                <button class="btn btn-success" id="saveInfo">
+                    <i class="bi bi-check-square-fill" type="submit"></i> Guardar
+                </button>
+            </div>
+        </div>
+    }
+
+</div>
+
+@section Scripts{
+    <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css' rel='stylesheet'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#input_fecha").datepicker({
+                dateFormat: 'dd/mm/yy',
+                changeMonth: true,
+                changeYear: true,
+                stepMonths: 12,
+                showAnim: "slideDown",
+                yearRange: '-100:+0',
+                autoclose: true,
+                maxDate: new Date(),
+                selectOtherMonths: true,
+                navigationAsDateFormat: true,
+            });
+        });
+    </script>
+}
+
+
+

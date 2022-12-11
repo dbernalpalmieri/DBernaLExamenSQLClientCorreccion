@@ -1,0 +1,80 @@
+﻿@model ML.Libro
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+
+<div class="container">
+    <div class="d-flex justify-content-between mb-2">
+        <button type="button" class="btn btn-success me-3"
+                onclick='window.location = "@Url.Action("Form", "Libro",this.Request.Url.Scheme)";'>
+            <i class="bi bi-plus-square"></i> Agregar Libro
+        </button>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-dark table-striped" id="tbl_libro">
+            <thead>
+                <tr>
+                    <th scope="col">@Html.DisplayNameFor(item => item.Nombre)</th>
+                    <th scope="col">@Html.DisplayNameFor(item => item.Autor.Nombre)</th>
+                    <th scope="col">@Html.DisplayNameFor(item => item.NumeroPaginas)</th>
+                    <th scope="col">@Html.DisplayNameFor(item => item.FechaPublicacion)</th>
+                    <th scope="col">@Html.DisplayNameFor(item => item.Editorial.Nombre)</th>
+                    <th scope="col">@Html.DisplayNameFor(item => item.Edicion)</th>
+                    <th scope="col">@Html.DisplayNameFor(item => item.Genero.Nombre)</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ML.Libro libro in Model.Libros)
+                {
+                    <tr>
+                        <th scope="row">@Html.DisplayFor(libroItem => libro.Nombre)</th>
+                        <td>@Html.DisplayFor(libroItem => libro.Autor.Nombre)</td>
+                        <td>@Html.DisplayFor(libroItem => libro.NumeroPaginas)</td>
+                        <td>@Html.DisplayFor(libroItem => libro.FechaPublicacion)</td>
+                        <td>@Html.DisplayFor(libroItem => libro.Editorial.Nombre)</td>
+                        <td>@Html.DisplayFor(libroItem => libro.Edicion)</td>
+                        <td>@Html.DisplayFor(libroItem => libro.Genero.Nombre)</td>
+                        <td>
+                            <div class="d-flex justify-content-between">
+                                <button type="button" class="btn btn-warning me-3"
+                                        onclick='window.location = "@Url.Action("Form", "Libro", new { IdLibro = libro.IdLibro },  this.Request.Url.Scheme)";'>
+                                    <i class="bi bi-pencil-fill"></i>
+                                </button>
+                                <a class="btn btn-danger bi bi-trash-fill" href="@Url.Action("Delete", "Libro", new { IdLibro = libro.IdLibro })"
+                                   onclick="return confirm('¿Estas seguro que deseas eliminar este registro?');"></a>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#tbl_libro').DataTable({
+                "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+                },
+
+            });
+        });
+    </script>
+}
+
+
