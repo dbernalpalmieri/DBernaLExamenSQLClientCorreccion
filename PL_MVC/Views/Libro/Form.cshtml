@@ -7,7 +7,7 @@
 
 <div class="container">
 
-    @using (Html.BeginForm("Form", "Libro", FormMethod.Post, new { enctype = "multipart/form-data", id = "form_usuario" }))
+    @using (Html.BeginForm("Form", "Libro", FormMethod.Post, new { enctype = "multipart/form-data", id = "form_libro" }))
     {
         @Html.HiddenFor(model => model.IdLibro)
         <div class="form-group d-flex mt-3 mb-3 row justify-content-center">
@@ -15,10 +15,9 @@
                 @Html.LabelFor(model => model.Nombre, "Libro", htmlAttributes: new { @class = "form-label" })
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1"><i class="bi bi-fonts"></i></span>
-                    @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej. John David" } })
-                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { id="input_Nombre", @class = "form-control", placeholder = "Ej. Harry Potter" } })
                 </div>
-                <div id="alert_Nombre" class="text-danger"></div>
+                <div id="alert_input_Nombre"></div>
             </div>
 
 
@@ -26,30 +25,27 @@
                 @Html.LabelFor(model => model.NumeroPaginas, "Paginas", htmlAttributes: new { @class = "form-label" })
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1"><i class="bi bi-fonts"></i></span>
-                    @Html.EditorFor(model => model.NumeroPaginas, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej. John David" } })
-                    @Html.ValidationMessageFor(model => model.NumeroPaginas, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.NumeroPaginas, new { htmlAttributes = new { id = "input_Paginas", value=' ', @class = "form-control", placeholder = "Ej. 200" } })
                 </div>
-                <div id="alert_Nombre" class="text-danger"></div>
+                <div id="alert_input_Paginas"></div>
             </div>
 
             <div class="col-md-3">
                 @Html.LabelFor(model => model.FechaPublicacion, "Lanzamiento", htmlAttributes: new { @class = "form-label" })
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1"><i class="bi bi-fonts"></i></span>
-                    @Html.EditorFor(model => model.FechaPublicacion, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej. John David", @id = "input_fecha" } })
-                    @Html.ValidationMessageFor(model => model.FechaPublicacion, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.FechaPublicacion, new { htmlAttributes = new { id = "input_Publicacion", @class = "form-control", placeholder = "Ej. dd/MM/yyyy"} })
                 </div>
-                <div id="alert_Nombre" class="text-danger"></div>
+                <div id="alert_input_Publicacion"></div>
             </div>
 
             <div class="col-md-3">
                 @Html.LabelFor(model => model.Edicion, "Edición", htmlAttributes: new { @class = "form-label" })
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1"><i class="bi bi-fonts"></i></span>
-                    @Html.EditorFor(model => model.Edicion, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej. John David" } })
-                    @Html.ValidationMessageFor(model => model.Edicion, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Edicion, new { htmlAttributes = new { id = "input_Edicion", @class = "form-control", placeholder = "Ej. American Version" } })
                 </div>
-                <div id="alert_Nombre" class="text-danger"></div>
+                <div id="alert_input_Edicion"></div>
             </div>
         </div>
 
@@ -59,30 +55,27 @@
                 @Html.LabelFor(model => model.Autor.IdAutor, "Autor", htmlAttributes: new { @class = "form-label" })
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1"><i class="bi bi-map-fill"></i></span>
-                    @Html.DropDownListFor(model => model.Autor.IdAutor, new SelectList(Model.Autor.Autores, "IdAutor", "Nombre"), "Selecciona un Autor", htmlAttributes: new { id = "", @class = "form-select" })
-                    @Html.ValidationMessageFor(model => model.Autor.IdAutor, null, new { @class = "text-danger" })
-
+                    @Html.DropDownListFor(model => model.Autor.IdAutor, new SelectList(Model.Autor.Autores, "IdAutor", "Nombre"), "Selecciona un Autor", htmlAttributes: new { id = "select_Autor", @class = "form-select" })
                 </div>
+                <div id="alert_select_Autor"></div>
             </div>
 
             <div class="col-md-4">
                 @Html.LabelFor(model => model.Genero.IdGenero, "Genero", htmlAttributes: new { @class = "form-label" })
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1"><i class="bi bi-map-fill"></i></span>
-                    @Html.DropDownListFor(model => model.Genero.IdGenero, new SelectList(Model.Genero.Generos, "IdGenero", "Nombre"), "Selecciona una Editorial", htmlAttributes: new { id = "", @class = "form-select" })
-                    @Html.ValidationMessageFor(model => model.Genero.IdGenero, null, new { @class = "text-danger" })
-
+                    @Html.DropDownListFor(model => model.Genero.IdGenero, new SelectList(Model.Genero.Generos, "IdGenero", "Nombre"), "Selecciona una Editorial", htmlAttributes: new { id = "select_Genero", @class = "form-select" })
                 </div>
+                <div id="alert_select_Genero"></div>
             </div>
 
             <div class="col-md-4">
                 @Html.LabelFor(model => model.Editorial.IdEditorial, "Editorial", htmlAttributes: new { @class = "form-label" })
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1"><i class="bi bi-map-fill"></i></span>
-                    @Html.DropDownListFor(model => model.Editorial.IdEditorial, new SelectList(Model.Editorial.Editoriales, "IdEditorial", "Nombre"), "Selecciona una Editorial", htmlAttributes: new { id = "", @class = "form-select" })
-                    @Html.ValidationMessageFor(model => model.Editorial.IdEditorial, null, new { @class = "text-danger" })
-
+                    @Html.DropDownListFor(model => model.Editorial.IdEditorial, new SelectList(Model.Editorial.Editoriales, "IdEditorial", "Nombre"), "Selecciona una Editorial", htmlAttributes: new { id = "select_Editorial", @class = "form-select" })
                 </div>
+                <div id="alert_select_Editorial"></div>
             </div>
         </div>
 
@@ -106,10 +99,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+
     <script type="text/javascript">
 
         $(document).ready(function () {
-            $("#input_fecha").datepicker({
+
+            var fullForm = true;
+
+            $("#input_Publicacion").datepicker({
                 dateFormat: 'dd/mm/yy',
                 changeMonth: true,
                 changeYear: true,
@@ -121,6 +120,82 @@
                 selectOtherMonths: true,
                 navigationAsDateFormat: true,
             });
+
+            $('#form_libro').on('submit', function () {
+                $(":input").each(function () {
+                    var id = $(this).prop('id');
+                    var input = $(this).val().trim();
+
+                    if (!input.length > 0 || input == 0) {
+                        fullForm = false;
+                        $(`#alert_${id}`).html('El atributo es requerido.').attr('class', 'text-danger');
+                    } else {
+                        $(`#alert_${id}`).html('✔').attr('class', 'text-dark');
+                    }
+                });
+
+                // do validation here
+                
+                return fullForm;
+                
+
+            });
+            $('#input_Nombre').on('keyup blur', function (event) {
+                $(this).prop('maxlength', '50');
+                if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); 
+            });
+
+
+            $('#input_Paginas').on('keyup blur', function (event) {
+                $(this).prop('maxlength', '5');
+                if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); 
+
+                var id = $(this).prop('id');
+                var input = $(this).val();
+                var regex = /[[1-9]{1}[0-9]{1,5}]*$/
+
+                if (regex.test(input)) {
+                    $(`#alert_${id}`).html('✔').attr('class', 'text-dark');
+                } else {
+                    this.value = this.value.replace(regex, '');
+                    $(`#alert_${id}`).html('Informacion invalida').attr('class', 'text-danger');
+                    fullForm = false;
+                }
+            });
+
+            $('#select_Autor').on('blur change', function () {
+                var id = $(this).prop('id');
+                if ($(this).val() == "") {
+                    fullForm = false;
+                    $(`#alert_${id}`).html('Selecciona un autor.').attr('class', 'text-danger');
+                } else {
+                    $(`#alert_${id}`).html('✔').attr('class', 'text-dark');
+                }
+            })
+
+            $('#select_Genero').on('blur change', function () {
+                var id = $(this).prop('id');
+                if ($(this).val() == "") {
+                    fullForm = false;
+                    $(`#alert_${id}`).html('Selecciona un genero.').attr('class', 'text-danger');
+                } else {
+                    $(`#alert_${id}`).html('✔').attr('class', 'text-dark');
+                }
+            })
+
+            $('#select_Editorial').on('blur change', function () {
+                var id = $(this).prop('id');
+                if ($(this).val() == "") {
+                    fullForm = false;
+                    $(`#alert_${id}`).html('Selecciona una Editorial.').attr('class', 'text-danger');
+                } else {
+                    $(`#alert_${id}`).html('✔').attr('class', 'text-dark');
+                }
+            })
+
+
+
+
         });
     </script>
 }
